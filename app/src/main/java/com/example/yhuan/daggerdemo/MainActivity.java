@@ -36,6 +36,9 @@ public class MainActivity extends AppCompatActivity implements IActivity {
         MainActivityComponent mainActivityComponent =  DaggerMainActivityComponent.builder().
                 mainActivityModule(new MainActivityModule(this)).build();
         mainActivityComponent.inject(this);
+
+        //asdasd
+
     }
 
     @Override
