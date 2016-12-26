@@ -1,7 +1,7 @@
 package com.example.yhuan.daggerdemo.di.modules;
 
 import com.example.yhuan.daggerdemo.IActivity;
-import com.example.yhuan.daggerdemo.presenter.IPersenter;
+import com.example.yhuan.daggerdemo.presenter.IPresenter;
 import com.example.yhuan.daggerdemo.presenter.MainPresneter;
 
 import dagger.Module;
@@ -14,7 +14,7 @@ import dagger.Provides;
 public class IPresenterModule {
 
     @Provides
-    IPersenter providePersenter(IActivity activity){
+    IPresenter providePersenter(IActivity activity){
         return new MainPresneter(activity);
     }
 

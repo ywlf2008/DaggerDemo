@@ -4,12 +4,13 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.TextView;
 
-import com.example.yhuan.daggerdemo.di.components.DaggerIPersenterComponent;
+import com.example.yhuan.daggerdemo.di.components.DaggerIActivityComponent;
+import com.example.yhuan.daggerdemo.di.components.DaggerIPresenterComponent;
 import com.example.yhuan.daggerdemo.di.components.DaggerMainActivityComponent;
-import com.example.yhuan.daggerdemo.di.components.MainActivityComponent;
-import com.example.yhuan.daggerdemo.di.modules.IPresenterModule;
-import com.example.yhuan.daggerdemo.di.modules.MainActivityModule;
-import com.example.yhuan.daggerdemo.presenter.IPersenter;
+import com.example.yhuan.daggerdemo.di.components.IActivityComponent;
+import com.example.yhuan.daggerdemo.di.components.IPresenterComponent;
+import com.example.yhuan.daggerdemo.di.modules.IActivityModule;
+import com.example.yhuan.daggerdemo.presenter.IPresenter;
 
 import javax.inject.Inject;
 
@@ -22,7 +23,7 @@ public class MainActivity extends AppCompatActivity implements IActivity {
     @Bind(R.id.text)
     TextView textView;
     @Inject
-    IPersenter iPersenter;
+    IPresenter iPresenter;
 
 
     @Override
@@ -30,14 +31,14 @@ public class MainActivity extends AppCompatActivity implements IActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
-//        iPersenter = new MainPresneter(this);
-//        DaggerMainActivityComponent.builder().mainActivityModule(new MainActivityModule(this)).build().inject(this);
 
-        MainActivityComponent mainActivityComponent =  DaggerMainActivityComponent.builder().
-                mainActivityModule(new MainActivityModule(this)).build();
-        mainActivityComponent.inject(this);
+//        MainActivityComponent mainActivityComponent =  DaggerMainActivityComponent.builder().
+//                mainActivityModule(new MainActivityModule(this)).build();
+//        mainActivityComponent.inject(this);
+        IActivityComponent iActivityComponent =  DaggerIActivityComponent.builder().iActivityModule(new IActivityModule(this)).build();
+        IPresenterComponent presenterComponent = DaggerIPresenterComponent.builder().iActivityComponent(iActivityComponent).build();
+        DaggerMainActivityComponent.builder().iPresenterComponent(presenterComponent).build().inject(this);
 
-        //asdasd
 
     }
 
@@ -48,6 +49,6 @@ public class MainActivity extends AppCompatActivity implements IActivity {
 
     @OnClick(R.id.text)
     public void onClick() {
-        iPersenter.show();
+        iPresenter.show();
     }
 }

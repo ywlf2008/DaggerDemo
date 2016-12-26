@@ -8,7 +8,7 @@ import com.example.yhuan.daggerdemo.data.IData;
  * Created by yhuan on 2016/12/24.
  */
 
-public class MainPresneter implements IPersenter{
+public class MainPresneter implements IPresenter{
 
     IActivity iActivity;
     IData iData;
